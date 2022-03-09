@@ -36,11 +36,9 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
-        - AttributeName: event
-          AttributeType: S
       KeySchema:
-        AttributeName: id
-        KeyType: HASH
+        - AttributeName: id
+          KeyType: HASH
   WebhookTopic:
     Type: AWS::SNS::Topic
     Properties:
