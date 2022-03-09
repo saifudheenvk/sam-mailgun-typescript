@@ -19,3 +19,5 @@ for folder in $(ls)
       cd $folder && npm install --save --save-exact && cd ..
    fi
   done
+
+npm run compile
