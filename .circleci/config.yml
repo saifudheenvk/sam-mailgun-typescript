@@ -11,9 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Run Script
-        command: |
-          ./deploy.sh MailGun us-east-1 WebhookTable vksaifudheen4@gmail.com
+          name: Run Script
+          command: |
+            ./deploy.sh MailGun us-east-1 WebhookTable vksaifudheen4@gmail.com
 
 workflows:
   version: 2
