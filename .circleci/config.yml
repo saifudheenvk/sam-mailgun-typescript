@@ -1,0 +1,26 @@
+version: '2.1'
+
+orbs:
+  node: circleci/node@5.0.0
+  aws-cli: circleci/aws-cli@2.1.0
+
+jobs:
+  build_and_deploy:
+    docker:
+      - image: 'cimg/node:lts'
+    steps:
+      - checkout
+      - run:
+        name: Run Script
+        command: |
+          ./deploy.sh MailGun us-east-1 WebhookTable vksaifudheen4@gmail.com
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build_and_deploy:
+          filters:
+            branches:
+              only:
+                - master

@@ -1,0 +1,82 @@
+AWSTemplateFormationVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: This is a test stack
+Parameters:
+  TopicName:
+    Type: String
+  TableName:
+    Type: String
+  StageName:
+    Type: String
+  Email:
+    Type: String
+
+Globals:
+  Api: 
+    OpenApiVersion: '3.0.0'
+  Function:
+    Timeout: 3
+    Runtime: nodejs14.x
+    MemorySize: 1024
+    Environment:
+      Variables:
+        Webhook_Table: ${TableName}
+
+Resources:
+  myApis:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub webhook-api
+      Description: My webhook api
+      StageName: !Sub ${StageName}
+      DefinitionUri: output/swagger_json.json
+  WebhookTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${TableName}
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: event
+          AttributeType: S
+      KeySchema:
+        AttributeName: id
+        KeyType: HASH
+  WebhookTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: ${TopicName}
+      FifoTopic: true
+      Subscription:
+        - Endpoint: !Ref Email
+          Protocol: email
+  WebhookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: webhook/
+      Handler: index.handler
+      FunctionName: !Sub webhook-handler
+      Description: Handle webhook from mailgun
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - 'dynamodb:PutItem'
+              Resource:
+                - !GetAtt WebhookTable.Arn
+            - Effect: Allow
+              Action: 
+                - "sns:Publish"
+                - "SNS:SetTopicAttributes"
+              Resource:
+                - !GetAtt WebhookTopic.Arn             
+      Events:
+        handleEvents:
+          Type: Api
+          Properties:
+            Path: /webhook
+            Method: post
+            RestApiId:
+              Ref: myApis
+

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2017",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "outDir": "build",
+    "sourceMap": true
+  },
+  "include": [
+    "./webhook/**/*.ts",
+    "./webhook/**/*.js"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
