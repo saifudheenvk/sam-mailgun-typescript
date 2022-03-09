@@ -46,7 +46,6 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       TopicName: ${TopicName}
-      FifoTopic: true
       Subscription:
         - Endpoint: !Ref Email
           Protocol: email

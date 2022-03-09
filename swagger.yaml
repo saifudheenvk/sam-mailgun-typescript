@@ -19,9 +19,8 @@ x-amazon-apigateway-request-validators:
     validateRequestParameters: false
 
 paths:
-  '/products':
+  /products:
     post:
-      operationId: handleWebhook
       x-amazon-apigateway-request-validator: all
       x-amazon-apigateway-integration:
         uri: >-
@@ -29,7 +28,7 @@ paths:
         passthroughBehavior: when_no_match
         type: aws_proxy
         httpMethod: POST
-        timeoutInMillis: 3000
+      operationId: handleWebhook
       requestBody:
         description: add new product
         required: true
