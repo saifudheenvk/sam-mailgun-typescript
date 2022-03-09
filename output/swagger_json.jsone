@@ -74,11 +74,7 @@
   "components": {
     "RequestBody": {
       "type": "object",
-      "title": "Response Body",
-      "required": [
-        "signature",
-        "event-data"
-      ],
+      "title": "Request Body",
       "properties": {
         "signature": {
           "type": "object"
@@ -90,14 +86,13 @@
     },
     "ResponseBody": {
       "type": "object",
+      "title": "Response Body",
       "properties": {
         "statusCode": {
-          "type": "integer",
-          "example": 400
+          "type": "integer"
         },
         "responseBody": {
-          "type": "string",
-          "example": "The submitted request body does not match the schema specification for this request. Please check if all mandatory fields are passed in the request body"
+          "type": "string"
         }
       }
     }
