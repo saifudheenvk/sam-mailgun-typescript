@@ -3,6 +3,8 @@
 TopicName="$1"
 SWREGION="$2"
 TableName="$3"
+StageName="$4"
+Email="$5"
 # yaml2json swagger.yaml | jq . > output/swagger_json.json
 # sed -ie 's/SWREGION/'${SWREGION}'/g' output/swagger_json.json
 
