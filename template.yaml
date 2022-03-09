@@ -28,7 +28,7 @@ Resources:
       Name: webhook-api
       Description: My webhook api
       StageName: !Sub ${StageName}
-      DefinitionUri: output/swagger_json.json
+      DefinitionUri: output/swagger.yaml
   WebhookTable:
     Type: AWS::DynamoDB::Table
     Properties:

@@ -6,10 +6,14 @@ TableName="$3"
 StageName="$4"
 Email="$5"
 BucketName="$6"
-# yaml2json swagger.yaml | jq . > output/swagger_json.json
-# sed -ie 's/SWREGION/'${SWREGION}'/g' output/swagger_json.json
 
-echo $BucketName  $SWREGION $BucketName $TopicName  $TableName $Email
+if [ ! -d output ]; then
+  mkdir output
+fi
+
+cp swagger.yaml output/swagger.yaml
+sed -ie 's/SWREGION/'${SWREGION}'/g' output/swagger.yaml
+
 
 aws cloudformation package          \
     --s3-bucket $BucketName             \
