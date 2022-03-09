@@ -21,7 +21,6 @@ x-amazon-apigateway-request-validators:
 paths:
   /webhook:
     post:
-      x-amazon-apigateway-request-validator: all
       x-amazon-apigateway-integration:
         uri: >-
           arn:aws:apigateway:SWREGION:lambda:path/2015-03-31/functions/arn:aws:lambda:SWREGION:829121778091:function:webhook-handler/invocations
