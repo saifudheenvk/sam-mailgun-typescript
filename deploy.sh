@@ -3,8 +3,8 @@
 TopicName="$1"
 SWREGION="$2"
 TableName="$3"
-yaml2json swagger.yaml | jq . > output/swagger_json.json
-sed -ie 's/SWREGION/'${SWREGION}'/g' output/swagger_json.json
+# yaml2json swagger.yaml | jq . > output/swagger_json.json
+# sed -ie 's/SWREGION/'${SWREGION}'/g' output/swagger_json.json
 
 aws cloudformation package          \
     --s3-bucket mycloud-saifu1             \

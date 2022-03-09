@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My webhook api",
+    "description": "My webhook api",
+    "version": "2.0.0",
+    "contact": {
+      "name": "Saifudheen",
+      "email": "vksaifudheen4@gmail.com"
+    }
+  },
+  "x-amazon-apigateway-request-validators": {
+    "all": {
+      "validateRequestBody": true,
+      "validateRequestParameters": true
+    },
+    "params": {
+      "validateRequestBody": true,
+      "validateRequestParameters": true
+    },
+    "body": {
+      "validateRequestBody": true,
+      "validateRequestParameters": false
+    }
+  },
+  "paths": {
+    "/products": {
+      "post": {
+        "operationId": "handleWebhook",
+        "x-amazon-apigateway-request-validator": "all",
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:SWREGION:lambda:path/2015-03-31/functions/arn:aws:lambda:SWREGION:829121778091:function:webhook-handler/invocations",
+          "passthroughBehavior": "when_no_match",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "timeoutInMillis": 3000
+        },
+        "requestBody": {
+          "description": "add new product",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User Identity Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "RequestBody": {
+      "type": "object",
+      "title": "Response Body",
+      "required": [
+        "signature",
+        "event-data"
+      ],
+      "properties": {
+        "signature": {
+          "type": "object"
+        },
+        "event-data": {
+          "type": "object"
+        }
+      }
+    },
+    "ResponseBody": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "example": 400
+        },
+        "responseBody": {
+          "type": "string",
+          "example": "The submitted request body does not match the schema specification for this request. Please check if all mandatory fields are passed in the request body"
+        }
+      }
+    }
+  }
+}
