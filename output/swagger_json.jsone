@@ -34,13 +34,14 @@
           "httpMethod": "POST"
         },
         "operationId": "handleWebhook",
+        "summary": "Handle Webhook",
         "requestBody": {
           "description": "add new product",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/WebhookBody"
+                "$ref": "#/components/schemas/WebhookBody"
               }
             }
           }
@@ -53,12 +54,22 @@
                 "schema": {
                   "type": "string"
                 }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/WebhookResponse"
+                  "$ref": "#/components/schemas/WebhookResponse"
                 }
               }
             }
@@ -75,7 +86,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/WebhookResponse"
+                  "$ref": "#/components/schemas/WebhookResponse"
                 }
               }
             }
@@ -85,27 +96,29 @@
     }
   },
   "components": {
-    "WebhookBody": {
-      "type": "object",
-      "title": "Request Body",
-      "properties": {
-        "signature": {
-          "type": "object"
-        },
-        "event-data": {
-          "type": "object"
+    "schemas": {
+      "WebhookBody": {
+        "type": "object",
+        "title": "Request Body",
+        "properties": {
+          "signature": {
+            "type": "object"
+          },
+          "event-data": {
+            "type": "object"
+          }
         }
-      }
-    },
-    "WebhookResponse": {
-      "type": "object",
-      "title": "Response Body",
-      "properties": {
-        "statusCode": {
-          "type": "integer"
-        },
-        "responseBody": {
-          "type": "string"
+      },
+      "WebhookResponse": {
+        "type": "object",
+        "title": "Response Body",
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "responseBody": {
+            "type": "string"
+          }
         }
       }
     }
