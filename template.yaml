@@ -58,7 +58,8 @@ Resources:
       Description: Handle webhook from mailgun
       Environment:
         Variables:
-          TopicArn: WebhookTopic.Arn
+          TopicArn: 
+            Ref: WebhookTopic
       Policies:
         - Version: "2012-10-17"
           Statement:
@@ -72,7 +73,7 @@ Resources:
                 - "sns:Publish"
                 - "SNS:SetTopicAttributes"
               Resource:
-                - !GetAtt WebhookTopic.Arn             
+                - Ref: WebhookTopic
       Events:
         handleEvents:
           Type: Api
