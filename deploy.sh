@@ -8,7 +8,7 @@ TableName="$3"
 
 aws cloudformation package          \
     --s3-bucket mycloud-saifu1             \
-    --template-file tem.yaml    \
+    --template-file template.yaml    \
     --region $SWREGION               \
     --output-template-file output/output.yaml 
 
