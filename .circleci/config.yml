@@ -13,6 +13,7 @@ jobs:
       - run:
           name: Run Script
           command: |
+            .circleci/npm-install.sh
             ./deploy.sh MailGun us-east-1 WebhookTable vksaifudheen4@gmail.com
 
 workflows:
