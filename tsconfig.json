@@ -8,8 +8,8 @@
     "sourceMap": true
   },
   "include": [
-    "./**/*.ts",
-    "./**/*.js"
+    "./webhook/**/*.ts",
+    "./webhook/**/*.js"
   ],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

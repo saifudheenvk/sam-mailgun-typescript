@@ -1,13 +1,13 @@
 import { Handler, APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda"
 import { IWebHookPayLoad } from "./types";
-const AWS = require('aws-sdk')
+import * as AWS from 'aws-sdk';
 
 const sns = new AWS.SNS({ apiVersion: '2012-11-05' })
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 type ProxyHandler = Handler<APIGatewayProxyEventV2, APIGatewayProxyResultV2>
 
-const handler: ProxyHandler = async (event, context) => {
+export const handler: ProxyHandler = async (event, context) => {
 
     let responseBody: string = "";
     let statusCode: number = 0;
@@ -53,5 +53,3 @@ const handler: ProxyHandler = async (event, context) => {
         },
     };
 };
-
-exports.handler = handler

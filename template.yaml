@@ -52,7 +52,7 @@ Resources:
   WebhookFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: webhook/
+      CodeUri: build/
       Handler: index.handler
       FunctionName: webhook-handler
       Description: Handle webhook from mailgun

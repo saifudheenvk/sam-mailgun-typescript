@@ -7,6 +7,10 @@ echo "Node and Npm Version:"
 node -v
 npm -v
 
+if [ -f package.jsons ]; then
+    npm install --save --save-exact
+fi
+
 for folder in $(ls)
   do
    if [ -f $folder/package.json ]; then
