@@ -41,7 +41,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/RequestBody"
               }
             }
           }
@@ -52,7 +52,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
+                  "$ref": "#/components/ResponseBody"
                 }
               }
             }
@@ -62,7 +62,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseBody"
+                  "$ref": "#/components/ResponseBody"
                 }
               }
             }

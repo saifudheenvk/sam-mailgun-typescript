@@ -36,20 +36,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestBody'
+              $ref: '#/components/RequestBody'
       responses:
         '201':
           description: User Identity Updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBody'
+                $ref: '#/components/ResponseBody'
         '400':
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBody'
+                $ref: '#/components/ResponseBody'
 components:
   RequestBody:
     type: object
