@@ -7,6 +7,8 @@ echo "Node and Npm Version:"
 node -v
 npm -v
 
+npm install -g typescript
+
 if [ -f package.jsons ]; then
     npm install --save --save-exact
 fi
