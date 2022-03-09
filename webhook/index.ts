@@ -7,39 +7,37 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 type ProxyHandler = Handler<APIGatewayProxyEventV2, APIGatewayProxyResultV2>
 
-export const handler: ProxyHandler = async (event, context) => {
+const handler: ProxyHandler = async (event, context) => {
 
     let responseBody: string = "";
     let statusCode: number = 0;
     try {
         const payload: IWebHookPayLoad = JSON.parse(event.body)
         const dbParams = {
-            TableName: process.env.Product_Table,
+            TableName: process.env.Webhook_Table,
             Item: {
                 id:payload["event-data"].id,
                 ...payload
             },
         };
 
-        const data = await docClient.put(dbParams).promise();
-        if (data.Item) {
-            const snsParams = {
-                Message: `email ${payload["event-data"].event}`,
-                Subject: 'Mailgun',
-                timestamp: payload["event-data"].timestamp,
-                MessageAttributes: {
-                    'AWS.MM.SMS.OriginationNumber': {
-                        'DataType': 'String',
-                        'StringValue': process.env.tenDLC
-                    }
+        await docClient.put(dbParams).promise();
+        const snsParams = {
+            Message: `email ${payload["event-data"].event}`,
+            Subject: 'Mailgun',
+            timestamp: payload["event-data"].timestamp,
+            TopicArn: process.env.TopicArn,
+            MessageAttributes: {
+                'timestamp': {
+                    'DataType': 'String',
+                    'StringValue': payload["event-data"].timestamp.toString()
                 }
             }
-            const result = await sns.publish(snsParams).promise()
-            console.log(result)
-        }else{
-            responseBody = "Couldn't add data to DB";
-            statusCode = 400
         }
+        const result = await sns.publish(snsParams).promise()
+        console.log(result)
+        responseBody = "Successfull";
+        statusCode = 200
     } catch (error) {
         console.log(error);
         responseBody = "Unable publish message";
@@ -55,3 +53,5 @@ export const handler: ProxyHandler = async (event, context) => {
         },
     };
 };
+
+exports.handler = handler

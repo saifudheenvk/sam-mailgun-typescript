@@ -57,6 +57,9 @@ Resources:
       Handler: index.handler
       FunctionName: !Sub webhook-handler
       Description: Handle webhook from mailgun
+      Environment:
+        Variables:
+          TopicArn: WebhookTopic.Arn
       Policies:
         - Version: "2012-10-17"
           Statement:
