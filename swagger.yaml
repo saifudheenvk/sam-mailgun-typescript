@@ -19,7 +19,7 @@ x-amazon-apigateway-request-validators:
     validateRequestParameters: false
 
 paths:
-  /products:
+  /webhook:
     post:
       x-amazon-apigateway-request-validator: all
       x-amazon-apigateway-integration:

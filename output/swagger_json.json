@@ -24,7 +24,7 @@
     }
   },
   "paths": {
-    "/products": {
+    "/webhook": {
       "post": {
         "x-amazon-apigateway-request-validator": "all",
         "x-amazon-apigateway-integration": {
