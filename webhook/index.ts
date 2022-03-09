@@ -16,7 +16,7 @@ export const handler: ProxyHandler = async (event, context) => {
         const dbParams = {
             TableName: process.env.Webhook_Table,
             Item: {
-                id:payload["event-data"].id,
+                id:new Date().getTime().toString(),
                 ...payload
             },
         };
