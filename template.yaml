@@ -39,6 +39,9 @@ Resources:
       KeySchema:
         - AttributeName: id
           KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
   WebhookTopic:
     Type: AWS::SNS::Topic
     Properties:

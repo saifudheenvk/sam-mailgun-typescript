@@ -9,6 +9,8 @@ BucketName="$6"
 # yaml2json swagger.yaml | jq . > output/swagger_json.json
 # sed -ie 's/SWREGION/'${SWREGION}'/g' output/swagger_json.json
 
+echo $BucketName  $SWREGION $BucketName $TopicName  $TableName $Email
+
 aws cloudformation package          \
     --s3-bucket $BucketName             \
     --template-file template.yaml    \
@@ -21,7 +23,7 @@ aws cloudformation deploy \
   --region $SWREGION  \
   --stack-name WebhookStack \
   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
-  --parameter-overrides TopicName=$TopicName \
+  --parameter-overrides TopicName=$TopicName   \
   TableName=$TableName \
   StageName=$StageName \
   Email=$Email
