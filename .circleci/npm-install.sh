@@ -9,7 +9,7 @@ npm -v
 
 sudo npm install -g typescript
 
-if [ -f package.jsons ]; then
+if [ -f package.json ]; then
     npm install --save --save-exact
 fi
 
