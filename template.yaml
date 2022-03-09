@@ -19,13 +19,13 @@ Globals:
     MemorySize: 1024
     Environment:
       Variables:
-        Webhook_Table: ${TableName}
+        Webhook_Table: !Sub ${TableName}
 
 Resources:
   myApis:
     Type: AWS::Serverless::Api
     Properties:
-      Name: !Sub webhook-api
+      Name: webhook-api
       Description: My webhook api
       StageName: !Sub ${StageName}
       DefinitionUri: output/swagger_json.json
@@ -45,7 +45,7 @@ Resources:
   WebhookTopic:
     Type: AWS::SNS::Topic
     Properties:
-      TopicName: ${TopicName}
+      TopicName: !Sub ${TopicName}
       Subscription:
         - Endpoint: !Ref Email
           Protocol: email
@@ -54,7 +54,7 @@ Resources:
     Properties:
       CodeUri: webhook/
       Handler: index.handler
-      FunctionName: !Sub webhook-handler
+      FunctionName: webhook-handler
       Description: Handle webhook from mailgun
       Environment:
         Variables:
