@@ -18,7 +18,8 @@ aws cloudformation package          \
 aws cloudformation deploy \
   --s3-bucket $BucketName       \
   --template-file output/output.yaml \
-  --stack-name WorkshopStack \
+  --region $SWREGION  \
+  --stack-name WebhookStack \
   --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
   --parameter-overrides TopicName=$TopicName \
   TableName=$TableName \
