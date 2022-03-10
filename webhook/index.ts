@@ -25,7 +25,7 @@ export const handler: ProxyHandler = async (event, context) => {
         const snsParams = {
             Message: `{
                 Provider: "Mailgun",
-                timestamp: ${payload["event-data"].timestamp}
+                timestamp: ${payload["event-data"].timestamp},
                 type: "email ${payload["event-data"].event}"
             }`,
             Subject: 'Mailgun',
