@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source constants.properties
-sh ./npm-install.sh
+./npm-install.sh
 
 if [ ! -d output ]; then
   mkdir output
