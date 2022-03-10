@@ -1,11 +1,7 @@
 #!/bin/bash
 
-TopicName="$1"
-SWREGION="$2"
-TableName="$3"
-StageName="$4"
-Email="$5"
-BucketName="$6"
+source constants.properties
+sh .circleci/npm-install.sh
 
 if [ ! -d output ]; then
   mkdir output
