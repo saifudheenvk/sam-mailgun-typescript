@@ -15,7 +15,8 @@ When we send an email with mailgun we will be getting some events like delivered
 On pushing my changes to github, circleci automatically triggers a job. It will install aws-cli and then it will run deploy .sh file. We can see the progress AWS console
 
 CircleCI job for deployment
->>jobs:
+```
+jobs:
   build_and_deploy:
     docker:
       - image: 'cimg/node:lts'
@@ -31,4 +32,4 @@ CircleCI job for deployment
           name: Run Script
           command: |
             ./deploy.sh
-
+```
