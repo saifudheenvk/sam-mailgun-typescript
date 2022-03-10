@@ -23,7 +23,11 @@ export const handler: ProxyHandler = async (event, context) => {
 
         await docClient.put(dbParams).promise();
         const snsParams = {
-            Message: `email ${payload["event-data"].event}`,
+            Message: `{
+                Provider: "Mailgun",
+                timestamp: ${payload["event-data"].timestamp}
+                type: "email ${payload["event-data"].event}"
+            }`,
             Subject: 'Mailgun',
             TopicArn: process.env.TopicArn,
             MessageAttributes: {
